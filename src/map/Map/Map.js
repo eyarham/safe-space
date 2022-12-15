@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react"
+import * as ol from "ol";
+import React, { useEffect, useRef, useState } from "react";
 import "./Map.css";
 import MapContext from "./MapContext";
-import * as ol from "ol";
 
 const Map = ({ children, zoom, center }) => {
 	const mapRef = useRef();
@@ -21,21 +21,21 @@ const Map = ({ children, zoom, center }) => {
 		setMap(mapObject);
 
 		return () => mapObject.setTarget(undefined);
-	}, []);
+	}, [center, zoom]);
 
 	// zoom change handler
 	useEffect(() => {
 		if (!map) return;
 
 		map.getView().setZoom(zoom);
-	}, [zoom]);
+	}, [map, zoom]);
 
 	// center change handler
 	useEffect(() => {
 		if (!map) return;
 
 		map.getView().setCenter(center)
-	}, [center])
+	}, [map, center])
 
 	return (
 		<MapContext.Provider value={{ map }}>
