@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs as getFirestoreDocs, getFirestore, onSnapshot, query, setDoc, where } from "firebase/firestore";
-import { getCurrentSub } from "../user/api";
+// import { getCurrentSub } from "../user/api";
 // Allows for better testing experience
 const firebase = {
   getAuth, collection, doc, getDoc, getFirestore, setDoc, deleteDoc
@@ -51,8 +51,9 @@ const api = (collectionString) => {
   }
 
   const createDoc = async doc => {
+   const user =  getCurrentUser();
     const docToAdd = {
-      createdBy: getCurrentUser().uid,
+      createdBy: (user && user.uid)|| "unknown",
       createdDate: new Date(),
       ...doc
     }
@@ -134,28 +135,30 @@ const api = (collectionString) => {
     return unsub;
   }
 
-  const getDocsByCurrentUserFieldSub = (field, callback) => {
-    return getCurrentSub(currentUser => {
-      if (currentUser) {
-        return getDocsByFieldSub(field, currentUser.id, callback);
-      }
-    })
-  }
+  // const getDocsByCurrentUserFieldSub = (field, callback) => {
+  //   return getCurrentSub(currentUser => {
+  //     if (currentUser) {
+  //       return getDocsByFieldSub(field, currentUser.id, callback);
+  //     }
+  //   })
+  // }
 
-  const getDocsByCurrentUserFieldAndOtherFieldsSub = (userIdField, fieldValueArray, callback) => {
-    return getCurrentSub(currentUser => {
-      if (currentUser) {
-        return getDocsByFieldsSub([{ field: userIdField, value: currentUser.id }, ...fieldValueArray], callback);
-      }
-    })
-  }
+  // const getDocsByCurrentUserFieldAndOtherFieldsSub = (userIdField, fieldValueArray, callback) => {
+  //   return getCurrentSub(currentUser => {
+  //     if (currentUser) {
+  //       return getDocsByFieldsSub([{ field: userIdField, value: currentUser.id }, ...fieldValueArray], callback);
+  //     }
+  //   })
+  // }
   const getDocs = async () => {
     return await getFirestoreDocs(getCollection());
   }
 
-  return { getDocsByCurrentUserFieldSub, getDocsByFieldsSub, getDocs, getDocsByCurrentUserFieldAndOtherFieldsSub, getDocsByFieldSub, confirmAddress, getCurrentUserSub, getCurrentUser, createDoc, getDocRef, getCollection, getById, set, deleteDocument, getByIdSub, getDocsSub, getDocsForCurrentUserSub, updateDoc };
+  return { 
+    // getDocsByCurrentUserFieldSub, 
+    getDocsByFieldsSub, getDocs, 
+    // getDocsByCurrentUserFieldAndOtherFieldsSub, 
+    getDocsByFieldSub, confirmAddress, getCurrentUserSub, getCurrentUser, createDoc, getDocRef, getCollection, getById, set, deleteDocument, getByIdSub, getDocsSub, getDocsForCurrentUserSub, updateDoc };
 }
 export default api;
-
-export { firebase };
 
