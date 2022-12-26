@@ -5,13 +5,13 @@ const Spaces = () => {
   const [markers, setMarkers] = useState([]);
   useEffect(() => {
     return getDocsSub((docs) => {
-      setMarkers(docs.map(d=>d.data().address.coords))
+      setMarkers(docs)
     })
 
   }, [])
   return (
     <div>
-      <SpaceMap markers={markers}/>
+      <SpaceMap markers={markers} />
     </div>
   )
 }
