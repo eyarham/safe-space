@@ -12,6 +12,7 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
+
   const setError = (message) => {
     setErrorMessage(message);
     setShowError(true);
