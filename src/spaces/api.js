@@ -8,5 +8,14 @@ const create = async (data) => {
   };
   await createDoc(newSpace);
 }
-export { create, getDocsSub };
+
+const getApprovedDocsSub = (callback) => {
+  return getDocsSub(docs => {
+    const approvedDocs = docs.filter(d => d.data().isApproved === true);
+
+    return callback(approvedDocs);
+  })
+}
+
+export { create, getDocsSub, getApprovedDocsSub };
 
