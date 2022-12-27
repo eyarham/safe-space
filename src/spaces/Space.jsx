@@ -1,46 +1,25 @@
-import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
-import AddressTextBox from '../map/AddressTextBox';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Spinner from '../_common/Spinner'
 // import AddressTextBox from '../map/AddressTextBox';
-import { create } from './api';
+import { getByIdSub } from './api';
 const Space = () => {
-  const [address, setAddress] = useState();
-  const [name, setName] = useState();
-  const [isValid, setIsValid] = useState(false);
+  const [existingData, setExistingData] = useState();
 
+  const { id } = useParams();
 
-
-  const onAddressChange = ( addressString, coords ) => {
-    setAddress({ addressString, coords });
-    validate();
-  }
-
-  const onNameChange = e => {
-    setName(e.target.value);
-    validate();
-  }
-  const validate = ()=>{
-
-    if (name && address) setIsValid(true);
-    else  setIsValid(false);
-  }
-
-  const onSubmitClick = async () => {
-    if (isValid) {
-      await create({ name, address })
-    }
-  }
+  useEffect(() => {
+    return getByIdSub(id, d => {
+      setExistingData(d);
+    });
+  }, [id])
+  if(!existingData) return <Spinner />
+  const { name, address } = existingData.data()
   return (
     <div>
-      <div>Add New Space</div>
+      <div>{name}</div>
       <div>
-        <Button disabled={!isValid} variant="contained" onClick={onSubmitClick}>Submit</Button>
-      </div>
-      <div>
-        <TextField label="space name" onChange={onNameChange} />
-      </div>
-      <div>
-        <AddressTextBox onChange={onAddressChange} />
+        {address.addressString}
       </div>
     </div>
   )
