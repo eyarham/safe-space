@@ -1,5 +1,5 @@
 import api from "../_common/api";
-const { createDoc, getDocsSub } = api("spaces");
+const { createDoc, getDocsSub, getByIdSub } = api("spaces");
 
 
 const create = async (data) => {
@@ -17,5 +17,5 @@ const getApprovedDocsSub = (callback) => {
   })
 }
 
-export { create, getDocsSub, getApprovedDocsSub };
+export { create, getDocsSub, getApprovedDocsSub, getByIdSub };
 

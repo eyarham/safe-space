@@ -43,7 +43,7 @@ const api = (collectionString) => {
     const docRef = getDocRef(id);
     return await firebase.getDoc(docRef);
   }
-  const getByIdSub = async (id, callback) => {
+  const getByIdSub = (id, callback) => {
     const unsub = onSnapshot(getDocRef(id), (docSnapshot) => {
       callback(docSnapshot);
     });
@@ -51,9 +51,9 @@ const api = (collectionString) => {
   }
 
   const createDoc = async doc => {
-   const user =  getCurrentUser();
+    const user = getCurrentUser();
     const docToAdd = {
-      createdBy: (user && user.uid)|| "unknown",
+      createdBy: (user && user.uid) || "unknown",
       createdDate: new Date(),
       ...doc
     }
@@ -154,11 +154,12 @@ const api = (collectionString) => {
     return await getFirestoreDocs(getCollection());
   }
 
-  return { 
+  return {
     // getDocsByCurrentUserFieldSub, 
-    getDocsByFieldsSub, getDocs, 
+    getDocsByFieldsSub, getDocs,
     // getDocsByCurrentUserFieldAndOtherFieldsSub, 
-    getDocsByFieldSub, confirmAddress, getCurrentUserSub, getCurrentUser, createDoc, getDocRef, getCollection, getById, set, deleteDocument, getByIdSub, getDocsSub, getDocsForCurrentUserSub, updateDoc };
+    getDocsByFieldSub, confirmAddress, getCurrentUserSub, getCurrentUser, createDoc, getDocRef, getCollection, getById, set, deleteDocument, getByIdSub, getDocsSub, getDocsForCurrentUserSub, updateDoc
+  };
 }
 export default api;
 
