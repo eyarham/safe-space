@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SpaceMap from '../map/SpaceMap';
 import { getApprovedDocsSub } from './api';
+import RatingGuide from './RatingGuide';
 const Spaces = () => {
   const [markers, setMarkers] = useState([]);
   useEffect(() => {
@@ -11,6 +12,7 @@ const Spaces = () => {
   }, [])
   return (
     <div>
+      <RatingGuide />
       <SpaceMap markers={markers} />
     </div>
   )
