@@ -34,9 +34,10 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
       return setError("no results found");
     }
     const addressString = getAddressString(address.address);
+    const shortAddressString = getShortAddressString(address.address);
     setAddress(addressString);
     const coords = [address.lon, address.lat];
-    onChange(addressString, coords);
+    onChange(addressString, coords,shortAddressString);
     setMapCenter(coords);
     setMapZoom(16);
   }
@@ -45,6 +46,10 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
     return addressString;
   }
 
+  const getShortAddressString = add => {
+    const addressString = `${add.house_number} ${add.road}`;
+    return addressString;
+  }
   const onInputChange = async e => {
     const value = e.target.value;
     setInputValue(value);
