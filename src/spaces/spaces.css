@@ -6,6 +6,7 @@
   
   text-decoration: none;
   color: black;
+  max-width: 100px;
 }
 .space-overlay-small-text {
   background-color: white;
