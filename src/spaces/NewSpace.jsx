@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import AddressTextBox from '../map/AddressTextBox';
 // import AddressTextBox from '../map/AddressTextBox';
 import { create } from './api';
+import RatingSlider from './RatingSlider';
 const NewSpace = () => {
   const [address, setAddress] = useState();
   const [name, setName] = useState();
+  const [rating, setRating] = useState();
   const [isValid, setIsValid] = useState(false);
 
 
-  const onAddressChange = ( addressString, coords ) => {
-    setAddress({ addressString, coords });
+  const onAddressChange = (addressString, coords, shortAddressString) => {
+    setAddress({ addressString, coords, shortAddressString });
     validate();
   }
 
@@ -18,15 +20,20 @@ const NewSpace = () => {
     setName(e.target.value);
     validate();
   }
-  const validate = ()=>{
+
+  const onRatingChange = r => {
+    setRating(r);
+    validate();
+  }
+  const validate = () => {
 
     if (name && address) setIsValid(true);
-    else  setIsValid(false);
+    else setIsValid(false);
   }
 
   const onSubmitClick = async () => {
     if (isValid) {
-      await create({ name, address })
+      await create({ name, address, rating, isApproved: false })
     }
   }
   return (
@@ -38,6 +45,7 @@ const NewSpace = () => {
       <div>
         <TextField label="space name" onChange={onNameChange} />
       </div>
+      <RatingSlider onChange={onRatingChange} />
       <div>
         <AddressTextBox onChange={onAddressChange} />
       </div>

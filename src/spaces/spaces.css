@@ -2,3 +2,32 @@
   background-color: white;
   width: 160px;
 }
+.space-overlay-small{
+  
+  text-decoration: none;
+  color: black;
+}
+.space-overlay-small-text {
+  background-color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+.overlay-star {
+  fill: currentColor;
+  width: 30px;
+}
+.star-blue {
+  color: blue;
+}
+.star-green {
+  color: green;
+}
+.star-orange {
+  color: orange;
+}
+.star-yellow {
+  color: #ffff00;
+}
+.star-red {
+  color: red;
+}

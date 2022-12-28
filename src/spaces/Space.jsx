@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Spinner from '../_common/Spinner'
 // import AddressTextBox from '../map/AddressTextBox';
 import { getByIdSub } from './api';
+import RatingDisplay from './RatingDisplay'
 const Space = () => {
   const [existingData, setExistingData] = useState();
 
@@ -14,13 +15,14 @@ const Space = () => {
     });
   }, [id])
   if(!existingData) return <Spinner />
-  const { name, address } = existingData.data()
+  const { name, address, rating } = existingData.data()
   return (
     <div>
       <div>{name}</div>
       <div>
         {address.addressString}
       </div>
+      <RatingDisplay value={rating} />
     </div>
   )
 }
