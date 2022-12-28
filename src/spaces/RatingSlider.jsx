@@ -1,5 +1,6 @@
 import { Slider } from '@mui/material'
 import React, { useState } from 'react'
+import RatingDisplay from './RatingDisplay';
 
 const RatingSlider = ({onChange, staticValue}) => {
   const [selectedRating, setSelectedRating]=useState();
@@ -11,7 +12,8 @@ const onRatingChange=e=>{
   onChange(e.target.value);
 }
   return (
-    <div><Slider
+    <div>Rating:
+      <Slider
     aria-label="Temperature"
     getAriaValueText={valuetext}
     valueLabelDisplay="auto"
@@ -22,7 +24,7 @@ const onRatingChange=e=>{
     onChange={onRatingChange}
     value={staticValue}
   />
-  {selectedRating}</div>
+  <RatingDisplay value={selectedRating}/></div>
   )
 }
 
