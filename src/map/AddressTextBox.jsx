@@ -1,17 +1,23 @@
 import { Box, Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { confirmAddress } from './api';
 import SpaceMap from './SpaceMap';
 
 const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) => {
-  const [inputValue, setInputValue] = useState(defaultValue);
-  const [address, setAddress] = useState(defaultValue);
+  const [inputValue, setInputValue] = useState('');
+  const [address, setAddress] = useState('');
   const [mapCenter, setMapCenter] = useState(defaultCoords);
   const [mapZoom, setMapZoom] = useState(16);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
+  useEffect(() => {
+    if (!defaultValue || !defaultValue.addressString) return;
+    setInputValue(defaultValue.addressString)
+    setAddress(defaultValue.addressString)
+  }
+    , [defaultValue])
 
   const setError = (message) => {
     setErrorMessage(message);
@@ -37,7 +43,7 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
     const shortAddressString = getShortAddressString(address.address);
     setAddress(addressString);
     const coords = [address.lon, address.lat];
-    onChange(addressString, coords,shortAddressString);
+    onChange(addressString, coords, shortAddressString);
     setMapCenter(coords);
     setMapZoom(16);
   }
@@ -62,7 +68,7 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
     <div>
       <Box component="form" onSubmit={onFormSubmit}>
         <div>
-          <TextField label="address" error={showError} helperText={errorMessage} onChange={onInputChange} defaultValue={defaultValue} />
+          <TextField label="address" error={showError} helperText={errorMessage} onChange={onInputChange} value={inputValue} />
         </div>
         <div>
           <Button onClick={checkAddress} >Check Address</Button>
