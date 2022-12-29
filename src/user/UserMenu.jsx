@@ -1,9 +1,9 @@
-import { Avatar, Divider, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import React, { useContext, useState, useEffect } from 'react';
+import { Avatar, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../user/UserContextProvider';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const UserMenu = () => {
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ const UserMenu = () => {
         // User is signed out
         // ...
         setLoggedInUser(null);
+        setUserInitial(null);
       }
     });
   }, [auth])
@@ -88,10 +89,6 @@ const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {loggedInUser &&
-          <MenuItem>{loggedInUser.email}</MenuItem>
-        }
-        <Divider />
         {settingLinks.map((setting) => (
           <MenuItem key={setting.value} onClick={() => navigateToSelected(setting.value, setting.isExternal)}>
             <Typography textAlign="center">{setting.text}</Typography>
