@@ -3,8 +3,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
 import { Outlet } from "react-router-dom";
 import FirebaseApp from '../firebase/FirebaseApp';
+import SpaceAppBar from '../menu/SpaceAppBar';
 import UserContextProvider from '../user/UserContextProvider';
-import MenuAppBar from './MenuAppBar';
 
 const Layout = () => {
   return (
@@ -15,7 +15,7 @@ const Layout = () => {
         {/* <AuthWrapper> */}
         <UserContextProvider>
           <div>
-            <MenuAppBar />
+            <SpaceAppBar />
             {/* <MainMenu /> */}
             <Container>
               <Box>
