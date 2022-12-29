@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Spinner from '../_common/Spinner';
 // import AddressTextBox from '../map/AddressTextBox';
 import { getByIdSub } from './api';
@@ -26,6 +26,7 @@ const Space = () => {
       </div>
       <div>Safe restroom availability? {(neutralRestroom && "yes") || "no"}</div>
       <div>Gender neutral restroom(s)?: {(safeRestroom && "yes") || "no"}</div>
+      <Link to="./edit">edit</Link>
     </div>
   )
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPanel from '../auth/LogInPanel';
 import Logout from '../auth/Logout';
-import NewSpace from '../spaces/NewSpace';
+import EditSpace from '../spaces/EditSpace';
+import NewNewSpace from '../spaces/NewNewSpace';
 import Space from '../spaces/Space';
 import Spaces from '../spaces/Spaces';
 import Account from '../user/Account';
@@ -17,8 +18,9 @@ const Router = () => {
           <Route path="/account" element={<Account />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/space" element={<NewSpace />} />
+          <Route path="/space" element={<NewNewSpace />} />
           <Route path="/space/:id" element={<Space />} />
+          <Route path="/space/:id/edit" element={<EditSpace />} />
           <Route path="/spaces" element={<Spaces />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/login" element={<LoginPanel />} />
