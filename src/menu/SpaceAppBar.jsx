@@ -34,7 +34,7 @@ function SpaceAppBar() {
 
 
   return (
-    <AppBar position="static" sx={{backgroundColor: "#ffaaaa"}}>
+    <AppBar position="static" sx={{backgroundColor: "#8240bf"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
