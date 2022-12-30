@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { UserContext } from '../user/UserContextProvider';
 import Spinner from '../_common/Spinner';
 // import AddressTextBox from '../map/AddressTextBox';
 import { getByIdSub } from './api';
 import RatingDisplay from './RatingDisplay';
 const Space = () => {
   const [existingData, setExistingData] = useState();
-
+  const [showEdit, setShowEdit] = useState();
+  const { user } = useContext(UserContext)
+  useEffect(() => {
+    if (user && user.data().isModerator) { setShowEdit(true) }
+  }, [user])
   const { id } = useParams();
 
   useEffect(() => {
@@ -26,7 +31,7 @@ const Space = () => {
       </div>
       <div>Safe restroom availability? {(neutralRestroom && "yes") || "no"}</div>
       <div>Gender neutral restroom(s)?: {(safeRestroom && "yes") || "no"}</div>
-      <Link to="./edit">edit</Link>
+      {showEdit && <Link to="./edit">edit</Link>}
     </div>
   )
 }
