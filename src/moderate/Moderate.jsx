@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../user/UserContextProvider';
-import Users from '../user/Users'
+import Users from '../user/Users';
+import ModerateTabs from './ModerateTabs';
 
 const Moderate = () => {
   const [isModerator, setIsModerator] = useState();
@@ -14,7 +15,9 @@ const Moderate = () => {
   return (
     <div>
       <div>Moderate</div>
-      <Users />   
+      <ModerateTabs >
+        <Users tabName="users" />
+      </ModerateTabs>
     </div>
   )
 }

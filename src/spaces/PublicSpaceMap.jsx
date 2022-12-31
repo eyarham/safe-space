@@ -1,21 +1,22 @@
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import SpaceMap from './SpaceMap';
 import { getApprovedDocsSub } from './api';
 import RatingGuide from './RatingGuide';
-const Spaces = () => {
-  const [markers, setMarkers] = useState([]);
+import SpaceMap from './SpaceMap';
+
+const PublicSpaceMap = () => {
+  const [spaces, setSpaces] = useState();
   useEffect(() => {
     return getApprovedDocsSub((docs) => {
-      setMarkers(docs)
+      setSpaces(docs)
     })
-
   }, [])
   return (
-    <div>
+    <Box>
       <RatingGuide />
-      <SpaceMap markers={markers} />
-    </div>
+      <SpaceMap spaces={spaces} />
+    </Box>
   )
 }
 
-export default Spaces
+export default PublicSpaceMap

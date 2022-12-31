@@ -1,21 +1,27 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import SpaceMap from '../spaces/SpaceMap';
 
 import { confirmAddress } from './api';
-import SpaceMap from './SpaceMap';
+//import SpaceMap from './SpaceMap';
 
 const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) => {
   const [inputValue, setInputValue] = useState('');
   const [address, setAddress] = useState('');
-  const [mapCenter, setMapCenter] = useState(defaultCoords);
-  const [mapZoom, setMapZoom] = useState(16);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [spaceMarker, setSpaceMarker] = useState();
 
   useEffect(() => {
     if (!defaultValue || !defaultValue.addressString) return;
-    setInputValue(defaultValue.addressString)
-    setAddress(defaultValue.addressString)
+    const {addressString, coords} = defaultValue;
+    setInputValue(addressString)
+    setAddress(addressString)
+    
+    setSpaceMarker([{ data: () => { 
+      return {name:addressString, 
+      rating:5,
+      address: { coords: coords } } } }]);
   }
     , [defaultValue])
 
@@ -44,8 +50,10 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
     setAddress(addressString);
     const coords = [address.lon, address.lat];
     onChange(addressString, coords, shortAddressString);
-    setMapCenter(coords);
-    setMapZoom(16);
+    setSpaceMarker([{ data: () => { 
+      return {name:addressString, 
+      rating:5,
+      address: { coords: coords } } } }]);
   }
   const getAddressString = add => {
     const addressString = `${add.house_number} ${add.road} ${add.town}, ${add.state} ${add.postcode}`;
@@ -79,8 +87,8 @@ const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) =
           <div >
             confirmed address: {address}
           </div>
-          <Box sx={{ width: 300, height: 300 }}>
-            <SpaceMap center={mapCenter} zoom={mapZoom} />
+          <Box sx={{ width: '100%', height: 300 }}>
+            <SpaceMap spaces={spaceMarker} />
           </Box>
         </div>
       }

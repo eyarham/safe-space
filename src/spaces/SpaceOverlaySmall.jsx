@@ -1,8 +1,8 @@
 import StarIcon from '@mui/icons-material/Star';
 import React from 'react';
 
-const SpaceOverlaySmall = ({ marker }) => {
-  const { name, rating } = marker.data();
+const SpaceOverlaySmall = ({ space }) => {
+  const { name, rating } = space.data();
   const getRatingData = value => {
     switch (value) {
       case 1:
@@ -19,14 +19,14 @@ const SpaceOverlaySmall = ({ marker }) => {
         break;
     }
   }
-  const href = `/space/${marker.id}`;
+  const href = space.id? `/space/${space.id}` : "#";
   if (!rating) return
   return (
     <a className='space-overlay-small' href={href}>
       <span>
         <StarIcon className={`overlay-star star-${getRatingData(rating).icon}`} sx={{ color: rating.icon }}></StarIcon>
       </span>
-      <span className="space-overlay-small-text">{name}</span>
+      <span className="space-overlay-small-text" sx={{maxWidth: 200}}>{name}</span>
     </a>
   )
 }
