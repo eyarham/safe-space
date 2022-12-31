@@ -1,5 +1,6 @@
 
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../user/UserContextProvider';
 import { getDocsSub, setIsModerator as setIsMod } from './api';
@@ -19,9 +20,8 @@ const Users = () => {
 
 
   return (
-    <div>
-      <div>Users</div>
-      <TableContainer component={Paper}>
+    <Box>
+      <TableContainer>
         <Table sx={{ minWidth: 350 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -58,7 +58,7 @@ const Users = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   )
 }
 
