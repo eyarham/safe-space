@@ -12,7 +12,7 @@
   background-color: white;
   padding: 5px;
   text-decoration: none;
-  outline: 1px black solid;
+  outline: 1px #aaaaaa solid;
   border-radius:8px
 }
 .overlay-star {

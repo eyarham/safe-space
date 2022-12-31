@@ -13,7 +13,7 @@ const EditSpace = () => {
   const { user } = useContext(UserContext)
   useEffect(() => {
     if (user && user.data().isModerator) { setIsModerator(true) }
-  }, [user])
+  }, [user]);
   useEffect(() => {
     return getByIdSub(id, d => {
       setExistingData(d);
@@ -26,10 +26,7 @@ const EditSpace = () => {
     alert("edited successfully");
   }
   if (!existingData) return <Spinner />
-  if (!isModerator) return (
-    <div>
-      you are not authorized to view this page.
-    </div>)
+  if (!isModerator) return (<div>you are not authorized to view this page.</div>)
   return (
     <Grid>
       Edit Space
