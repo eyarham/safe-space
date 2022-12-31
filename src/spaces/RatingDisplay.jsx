@@ -32,4 +32,4 @@ const RatingDisplay = ({ value }) => {
   )
 }
 
-export default RatingDisplay
+export default RatingDisplay;

@@ -1,8 +1,11 @@
 import React from 'react'
+import Spaces from '../spaces/Spaces'
 
 const Submissions = () => {
   return (
-    <div>Submissions</div>
+    <div>
+      <Spaces />
+    </div>
   )
 }
 
