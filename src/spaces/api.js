@@ -1,5 +1,5 @@
 import api from "../_common/api";
-const { createDoc, getDocsSub, getByIdSub, updateDoc  } = api("spaces");
+const { createDoc, getDocsSub, getByIdSub, updateDoc,updateField } = api("spaces");
 
 
 const create = async (data) => {
@@ -18,5 +18,9 @@ const getApprovedDocsSub = (callback) => {
   })
 }
 
-export { create, getDocsSub, getApprovedDocsSub, getByIdSub, updateDoc };
+const setIsApproved =async (id,isApproved)=>{
+  await updateField(id,{isApproved});
+}
+
+export { create, getDocsSub, getApprovedDocsSub, getByIdSub, updateDoc,setIsApproved };
 

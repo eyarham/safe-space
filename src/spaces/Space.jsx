@@ -49,7 +49,6 @@ const Space = () => {
       </div>
       <div>Safe restroom availability? {(neutralRestroom && "yes") || "no"}</div>
       <div>Gender neutral restroom(s)?: {(safeRestroom && "yes") || "no"}</div>
-
       <SpaceMap spaces={spaceMarker} />
     </div>
   )
