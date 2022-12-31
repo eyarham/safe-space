@@ -21,7 +21,7 @@ const Users = () => {
 
   return (
     <Box>
-      <TableContainer>
+      <TableContainer component={Paper}>
         <Table sx={{ minWidth: 350 }} aria-label="simple table">
           <TableHead>
             <TableRow>
