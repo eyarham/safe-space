@@ -74,6 +74,13 @@ const api = (collectionString) => {
     await firebase.setDoc(getDocRef(id), updatedData);
   }
 
+  const updateField = async (id, fieldObj) => {
+    const docRef = getDocRef(id);
+    const doc = await firebase.getDoc(docRef);
+    const updatedData = { ...doc.data(), ...doc.data(), ...fieldObj };
+    await firebase.setDoc(getDocRef(id), updatedData);
+  }
+
   const deleteDocument = async id => {
     await firebase.deleteDoc(getDocRef(id));
   }
@@ -158,7 +165,21 @@ const api = (collectionString) => {
     // getDocsByCurrentUserFieldSub, 
     getDocsByFieldsSub, getDocs,
     // getDocsByCurrentUserFieldAndOtherFieldsSub, 
-    getDocsByFieldSub, confirmAddress, getCurrentUserSub, getCurrentUser, createDoc, getDocRef, getCollection, getById, set, deleteDocument, getByIdSub, getDocsSub, getDocsForCurrentUserSub, updateDoc
+    getDocsByFieldSub,
+    confirmAddress,
+    getCurrentUserSub,
+    getCurrentUser,
+    createDoc,
+    getDocRef,
+    getCollection,
+    getById,
+    set,
+    deleteDocument,
+    getByIdSub,
+    getDocsSub,
+    getDocsForCurrentUserSub,
+    updateDoc,
+    updateField
   };
 }
 export default api;

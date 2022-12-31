@@ -2,7 +2,7 @@ import { getAuth, signInWithEmailAndPassword, updateEmail } from "firebase/auth"
 import { getDoc, getDocs, onSnapshot, query, where } from "firebase/firestore";
 import api from "../_common/api";
 
-const { getCurrentUser, getCollection, set, getById, getByIdSub, getCurrentUserSub, createDoc } = api("users");
+const { getCurrentUser, getCollection, set, getById, getByIdSub, getCurrentUserSub, createDoc, getDocsSub, updateField } = api("users");
 
 const create = async (authId) => {
   var newUserData = {
@@ -116,5 +116,27 @@ const getUserPronouns = async (userId) => {
   return user.data() && user.data().pronouns;
 }
 
-export { create, get, getByIdSub, getCurrentSub, set, updateUserEmail, getUserName, getCurrentUserId, getUserPronouns, getUserNameSub, getLoggedInUser, getByAuthIdSub, getById };
+const setIsModerator = async (userId, isModerator) => {
+  if (!userId) return;
+  await updateField(userId, { isModerator })
+}
+
+export {
+  create,
+  get,
+  getByIdSub,
+  getCurrentSub,
+  set,
+  updateUserEmail,
+  getUserName,
+  getCurrentUserId,
+  getUserPronouns,
+  getUserNameSub,
+  getLoggedInUser,
+  getByAuthIdSub,
+  getById,
+  getDocs,
+  getDocsSub,
+  setIsModerator
+};
 

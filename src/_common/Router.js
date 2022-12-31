@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPanel from '../auth/LogInPanel';
 import Logout from '../auth/Logout';
+import Moderate from '../moderate/Moderate';
 import EditSpace from '../spaces/EditSpace';
 import NewNewSpace from '../spaces/NewNewSpace';
 import Space from '../spaces/Space';
@@ -24,6 +25,7 @@ const Router = () => {
           <Route path="/spaces" element={<Spaces />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/login" element={<LoginPanel />} />
+          <Route path="/moderate" element={<Moderate />} />
         </Route>
       </Routes>
     </BrowserRouter>

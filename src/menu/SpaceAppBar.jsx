@@ -8,33 +8,46 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../user/UserContextProvider';
 import UserMenu from '../user/UserMenu';
-const pages = ['add new'];
+import Spinner from '../_common/Spinner';
 
 function SpaceAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate()
-
+  const [isModerator, setIsModerator] = useState();
+  const [pages, setPages] = useState();
+  const { user } = useContext(UserContext);
+  //const pages = ['add new'];
+  useEffect(() => {
+    setPages(['add new']);
+    if(isModerator)
+    {setPages(['add new', 'moderate'])}
+  }, [isModerator])
+  useEffect(() => {
+    if (user && user.data().isModerator) { setIsModerator(true) }
+  }, [user]);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
   const handleCloseNavMenu = (e) => {
     setAnchorElNav(null);
-    switch(e.target.textContent)
-    {
+    switch (e.target.textContent) {
       case "add new":
         return navigate("/space")
+        case "moderate":
+          return navigate("/moderate")
       default:
         break;
     }
   };
 
-
+if(!pages) return <Spinner />
   return (
-    <AppBar position="static" sx={{backgroundColor: "#8240bf"}}>
+    <AppBar position="static" sx={{ backgroundColor: "#8240bf" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
