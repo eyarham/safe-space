@@ -14,7 +14,7 @@ const Moderate = () => {
 
   return (
     <div>
-      <div>Moderate</div>
+      <h2>Moderate</h2>
       <ModerateTabs >
         <Users tabName="users" />
       </ModerateTabs>
