@@ -3,8 +3,8 @@ import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import Reports from '../reports/Reports';
 import Users from '../user/Users';
-import Reports from './Reports';
 import Submissions from './Submissions';
 
 function TabPanel(props) {

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPanel from '../auth/LogInPanel';
 import Logout from '../auth/Logout';
 import Moderate from '../moderate/Moderate';
+import Report from '../reports/Report';
 import EditSpace from '../spaces/EditSpace';
 import NewNewSpace from '../spaces/NewNewSpace';
 import Space from '../spaces/Space';
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/login" element={<LoginPanel />} />
           <Route path="/moderate" element={<Moderate />} />
+          <Route path="/report/:spaceId" element={<Report />} />
         </Route>
       </Routes>
     </BrowserRouter>
