@@ -14,7 +14,7 @@ const NewNewSpace = () => {
   }
   return (
     <Grid>
-      New Space
+      <h2>New Space</h2>
       <SpaceForm onSubmit={onCreateSubmit} />
     </Grid>
   )
