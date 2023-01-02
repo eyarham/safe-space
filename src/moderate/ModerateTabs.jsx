@@ -1,11 +1,16 @@
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
+import AdjustIcon from '@mui/icons-material/Adjust';
+
 import Tabs from '@mui/material/Tabs';
 import PropTypes from 'prop-types';
-import * as React from 'react';
 import Reports from '../reports/Reports';
 import Users from '../user/Users';
 import Submissions from './Submissions';
+import NewIcon from '../_common/NewIcon';
+import React, { useEffect, useState } from 'react';
+import { hasUnreviewedSub as hasUnreviewedReports } from '../reports/api';
+import { hasUnreviewedSub as hasUnreviewedSpaces} from '../spaces/api';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,26 +46,31 @@ function a11yProps(index) {
 }
 
 export default function ModerateTabs({ tabArray }) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [newSubs, setNewSubs] = useState(0);
+  const [newReports, setNewReports] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+useEffect(()=>{
+  hasUnreviewedReports(setNewReports);
+  hasUnreviewedSpaces(setNewSubs)
+},[])
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="users" {...a11yProps(0)} />
-          <Tab label="submissions" {...a11yProps(1)} />
-          <Tab label="reports" {...a11yProps(2)} />
+          <Tab label="submissions" {...a11yProps(1)} icon={newSubs ? <NewIcon />: ''} iconPosition="end"/>
+          <Tab label="reports" {...a11yProps(2)} icon={newReports ? <NewIcon />: ''} iconPosition="end"/>
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <Users />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Submissions />
+        <Submissions /><AdjustIcon sx={{ color: 'orange', fill: 'currentcolor' }} ></AdjustIcon>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Reports />
