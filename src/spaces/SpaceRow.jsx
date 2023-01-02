@@ -1,18 +1,22 @@
-import { Button, TableCell, TableRow } from '@mui/material'
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { setIsApproved } from './api'
-import RatingDisplay from './RatingDisplay'
+import { Button, TableCell, TableRow } from '@mui/material';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import NewIcon from '../_common/NewIcon';
+import { setIsApproved, setIsReviewed } from './api';
+import RatingDisplay from './RatingDisplay';
 
 const SpaceRow = ({ space }) => {
   const navigate = useNavigate();
-  const { name, type, address, rating, neutralRestroom, safeRestroom, isApproved } = space.data()
+  const { name, type, address, rating, neutralRestroom, safeRestroom, isApproved, isReviewed } = space.data()
 
   const approve = async () => {
     await setIsApproved(space.id, true);
   }
   const remove = async () => {
     await setIsApproved(space.id, false);
+  }
+  const markReviewed = async () => {
+    await setIsReviewed(space.id, true);
   }
   const onRowClick = e => {
     navigate(`/space/${space.id}/edit`)
@@ -39,8 +43,14 @@ const SpaceRow = ({ space }) => {
       <TableCell component="th" scope="row">
         {safeRestroom ? "yes" : "no"}
       </TableCell>
-      {isApproved && <TableCell align="right"><Button onClick={remove}>remove</Button></TableCell>}
-      {!isApproved && <TableCell align="right"><Button onClick={approve}>approve</Button></TableCell>}
+      <TableCell>
+        {isApproved && <Button onClick={remove}>remove</Button>}
+        {!isApproved && <Button onClick={approve}>approve</Button>}
+        {!isReviewed && <Button onClick={markReviewed}>mark reviewed</Button>}
+      </TableCell>
+      <TableCell>
+        {!isReviewed && <NewIcon />}
+      </TableCell>
     </TableRow>
   )
 }

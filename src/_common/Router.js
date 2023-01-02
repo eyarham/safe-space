@@ -7,7 +7,6 @@ import Report from '../reports/Report';
 import EditSpace from '../spaces/EditSpace';
 import NewNewSpace from '../spaces/NewNewSpace';
 import Space from '../spaces/Space';
-import Spaces from '../spaces/Spaces';
 import Account from '../user/Account';
 import Home from './Home';
 import Layout from './Layout';
@@ -23,7 +22,6 @@ const Router = () => {
           <Route path="/space" element={<NewNewSpace />} />
           <Route path="/space/:id" element={<Space />} />
           <Route path="/space/:id/edit" element={<EditSpace />} />
-          <Route path="/spaces" element={<Spaces />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/login" element={<LoginPanel />} />
           <Route path="/moderate" element={<Moderate />} />

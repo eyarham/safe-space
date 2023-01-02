@@ -22,6 +22,7 @@ const Spaces = () => {
             <TableCell>neutral bath?</TableCell>
             <TableCell >safe bath?</TableCell>
             <TableCell align="right">actions</TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
