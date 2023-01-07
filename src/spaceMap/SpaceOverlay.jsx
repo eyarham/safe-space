@@ -1,5 +1,5 @@
 import React from 'react';
-import RatingDisplay from './RatingDisplay';
+import RatingDisplay from '../spaces/RatingDisplay';
 import './spaces.css';
 const SpaceOverlay = ({ marker }) => {
 

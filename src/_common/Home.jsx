@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import React from 'react';
-import PublicSpaceMap from '../spaces/PublicSpaceMap';
+import PublicSpaceMap from '../spaceMap/PublicSpaceMap';
 const Home = () => {
 
   return (

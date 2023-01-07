@@ -6,7 +6,7 @@ import Spinner from '../_common/Spinner';
 // import AddressTextBox from '../map/AddressTextBox';
 import { getByIdSub } from './api';
 import RatingDisplay from './RatingDisplay';
-import SpaceMap from './SpaceMap';
+import SpaceMap from '../spaceMap/SpaceMap';
 const Space = () => {
   const navigate = useNavigate();
   const [existingData, setExistingData] = useState();
