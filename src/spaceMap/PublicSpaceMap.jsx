@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import { getApprovedDocsSub } from './api';
-import RatingGuide from './RatingGuide';
+import { getApprovedDocsSub } from '../spaces/api';
+import RatingGuide from '../spaces/RatingGuide';
 import SpaceMap from './SpaceMap';
 import SpaceMapFilter from './SpaceMapFilter';
 

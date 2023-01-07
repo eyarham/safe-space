@@ -1,7 +1,7 @@
 import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import AddressTextBox from '../map/AddressTextBox';
+import AddressTextBox from '../spaceMap/AddressTextBox';
 // import AddressTextBox from '../map/AddressTextBox';
 import RatingSlider from './RatingSlider';
 const SpaceForm = ({ onSubmit, space }) => {

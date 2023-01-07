@@ -1,8 +1,8 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import SpaceMap from '../spaces/SpaceMap';
+import SpaceMap from '../spaceMap/SpaceMap';
 
-import { confirmAddress } from './api';
+import { confirmAddress } from '../map/api';
 //import SpaceMap from './SpaceMap';
 
 const AddressTextBox = ({ onChange = () => { }, defaultValue, defaultCoords }) => {
