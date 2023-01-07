@@ -1,17 +1,13 @@
-import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import MapPanel from '../map/MapPanel';
-import SpaceMapFilter from './SpaceMapFilter';
 import SpaceOverlaySmall from './SpaceOverlaySmall';
 
 const SpaceMap = ({ spaces }) => {
   const [overlays, setOverlays] = useState();
-  const [filter, setFilter] = useState();
   const [center, setCenter] = useState();
   useEffect(() => {
     const overlaysBuild = spaces && spaces.map((s, i) => {
-      const { address, rating } = s.data();
-      if (filter && filter.length > 0 && filter.indexOf(rating) < 0) return <></>
+      const { address } = s.data();
       return <SpaceOverlaySmall space={s} coor={address.coords} />
     })
     setOverlays(overlaysBuild)
@@ -20,15 +16,9 @@ const SpaceMap = ({ spaces }) => {
       const spaceLonLat = spaces[0].data().address.coords;
       setCenter(spaceLonLat);
     }
-  }, [spaces, filter])
-  const onFilterChange = filter => {
-    setFilter(filter)
-  }
+  }, [spaces])
   return (
-    <Box>
-      <SpaceMapFilter onChange={onFilterChange} />
-      <MapPanel overlays={overlays} center={center} />
-    </Box>
+    <MapPanel overlays={overlays} center={center} />
   )
 }
 
