@@ -22,7 +22,7 @@ const UserMenu = () => {
       setSettingLinks([{ text: 'Account', value: 'account' }, { text: 'Logout', value: 'logout' }])
     }
     else {
-      setSettingLinks([{ text: 'Login', value: 'login' }])
+      setSettingLinks([{ text: 'Login', value: 'signin' }])
     }
   }, [loggedInUser])
   useEffect(() => {
