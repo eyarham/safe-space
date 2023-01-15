@@ -1,8 +1,8 @@
-import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import AddressTextBox from '../spaceMap/AddressTextBox';
-// import AddressTextBox from '../map/AddressTextBox';
+import CheckboxWithHelp from '../_common/CheckboxWithHelp';
 import RatingSlider from './RatingSlider';
 const SpaceForm = ({ onSubmit, space }) => {
   const [address, setAddress] = useState('');
@@ -51,10 +51,10 @@ const SpaceForm = ({ onSubmit, space }) => {
     setNeutralRestroom(e.target.checked);
     setIsDirty(true);
   }
-  useEffect(()=>{
+  useEffect(() => {
     if (name && type && address && rating) setIsValid(true);
     else setIsValid(false);
-  },[name, address, rating, type])
+  }, [name, address, rating, type])
 
   const onSubmitClick = async () => {
     if (isValid) {
@@ -62,18 +62,19 @@ const SpaceForm = ({ onSubmit, space }) => {
       onSubmit(editedValue);
     }
   }
-
   return (
     <Container sx={{ maxWidth: { sm: '50%', xs: '90%' } }}>
       <Button disabled={!isDirty || !isValid} variant="contained" onClick={onSubmitClick} sx={{ margin: 1 }}>Submit</Button>
       <TextField fullWidth label="space name" value={name} onChange={onNameChange} sx={{ margin: 1 }} />
       <TextField label="space type" value={type} onChange={onTypeChange} sx={{ margin: 1 }} />
-      <FormGroup>
-        <FormControlLabel control={<Checkbox checked={safeRestroom} onChange={onSafeRestroomChange} />} label="Safe restroom availability?" />
-      </FormGroup>
-      <FormGroup>
-        <FormControlLabel control={<Checkbox checked={neutralRestroom} onChange={onNeutralRestroomChange} />} label="Gender neutral restroom(s)?" />
-      </FormGroup>
+      <CheckboxWithHelp checked={safeRestroom} onChange={onSafeRestroomChange}
+        label="Safe restroom availability?"
+        helpText="Select this if you were able to find a restroom that you felt safe to use"
+      />
+      <CheckboxWithHelp checked={neutralRestroom} onChange={onNeutralRestroomChange}
+        label="Gender neutral restroom(s)?"
+        helpText="Select this if you you had access to gender neutral restrooms"
+      />
       <RatingSlider value={rating} onChange={onRatingChange} sx={{ margin: 1 }} />
       <AddressTextBox defaultValue={address} onChange={onAddressChange} />
     </Container>
