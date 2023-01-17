@@ -6,6 +6,7 @@ import SignIn from '../auth/SignIn';
 import SignUp from '../auth/SignUp';
 import Moderate from '../moderate/Moderate';
 import Report from '../reports/Report';
+import NewReview from '../review/NewReview';
 import EditSpace from '../spaces/EditSpace';
 import NewNewSpace from '../spaces/NewNewSpace';
 import Space from '../spaces/Space';
@@ -30,6 +31,7 @@ const Router = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/moderate" element={<Moderate />} />
           <Route path="/report/:spaceId" element={<Report />} />
+          <Route path="/newreview/:spaceId" element={<NewReview />} />
         </Route>
       </Routes>
     </BrowserRouter>

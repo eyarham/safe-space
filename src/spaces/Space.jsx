@@ -9,7 +9,7 @@ import RatingDisplay from './RatingDisplay';
 import SpaceMap from '../spaceMap/SpaceMap';
 const Space = () => {
   const navigate = useNavigate();
-  const [existingData, setExistingData] = useState();
+  const [existingSpace, setExistingSpace] = useState();
   const [showEdit, setShowEdit] = useState();
   const [spaceMarker, setSpaceMarker] = useState();
   const { user } = useContext(UserContext)
@@ -20,13 +20,13 @@ const Space = () => {
 
   useEffect(() => {
     return getByIdSub(id, d => {
-      setExistingData(d);
+      setExistingSpace(d);
     });
   }, [id]);
 
   useEffect(() => {
-    if (!existingData) return;
-    const { address } = existingData.data();
+    if (!existingSpace) return;
+    const { address } = existingSpace.data();
     const { addressString, coords } = address;
     setSpaceMarker([{
       data: () => {
@@ -37,19 +37,23 @@ const Space = () => {
         }
       }
     }]);
-  }, [existingData]);
+  }, [existingSpace]);
 
   const onReportClick = e => {
-    navigate(`/report/${existingData.id}`)
+    navigate(`/report/${existingSpace.id}`)
+  }
+  const onAddReviewClick = e => {
+    navigate(`/newreview/${existingSpace.id}`)
   }
   const onEditClick = e => {
     navigate('./edit')
   }
-  if (!existingData) return <Spinner />
-  const { name, type, address, rating, neutralRestroom, safeRestroom } = existingData.data()
+  if (!existingSpace) return <Spinner />
+  const { name, type, address, rating, neutralRestroom, safeRestroom } = existingSpace.data()
   return (
     <div>
       {showEdit && <Button onClick={onEditClick}>edit</Button>}
+      <Button onClick={onAddReviewClick}>add a review</Button>
       <Button onClick={onReportClick}>report</Button>
       <div>{name}</div>
       <div>{type}</div>
