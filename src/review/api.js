@@ -1,5 +1,7 @@
 import api from "../_common/api";
-const { createDoc } = api("reviews");
+const { createDoc, createAnonDoc } = api("reviews");
 
-export { createDoc };
+
+
+export { createDoc, createAnonDoc };
 

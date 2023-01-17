@@ -59,6 +59,14 @@ const api = (collectionString) => {
     }
     return await addDoc(getCollection(), docToAdd);
   }
+  const createAnonDoc = async doc => {
+    const docToAdd = {
+      createdBy:  "anonymous",
+      createdDate: new Date(),
+      ...doc
+    }
+    return await addDoc(getCollection(), docToAdd);
+  }
 
   const set = async (id, data) => {
     const docRef = getDocRef(id);
@@ -170,6 +178,7 @@ const api = (collectionString) => {
     getCurrentUserSub,
     getCurrentUser,
     createDoc,
+    createAnonDoc,
     getDocRef,
     getCollection,
     getById,

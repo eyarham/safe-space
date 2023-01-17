@@ -5,7 +5,7 @@ import { getByIdSub } from '../spaces/api';
 import RatingSlider from '../spaces/RatingSlider';
 import CheckboxWithHelp from '../_common/CheckboxWithHelp';
 import Spinner from '../_common/Spinner';
-import { createDoc } from './api';
+import { createAnonDoc, createDoc } from './api';
 
 const NewReview = () => {
   const { spaceId } = useParams();
@@ -13,6 +13,7 @@ const NewReview = () => {
   const [rating, setRating] = useState(null);
   const [safeRestroom, setSafeRestroom] = useState(null);
   const [neutralRestroom, setNeutralRestroom] = useState(null);
+  const [isAnonymous, setIsAnonymous] = useState(true);
   const [space, setSpace] = useState();
   const [isValid, setIsValid] = useState(false);
 
@@ -31,13 +32,18 @@ const NewReview = () => {
   const onNeutralRestroomChange = e => {
     setNeutralRestroom(e.target.checked);
   }
+  const onAnonymousChange = e => {
+    setIsAnonymous(e.target.checked);
+  }
   const onRatingChange = r => {
     setRating(r);
   }
-  const onSubmitClick = () => {
+  const onSubmitClick = async () => {
     if (!isValid) return;
-    const review = { name, rating, isApproved: false, safeRestroom, neutralRestroom, spaceId }
-    createDoc(review);
+    const review = { name, rating, isApproved: false, safeRestroom, neutralRestroom, spaceId, isAnonymous }
+    if (isAnonymous) { await createAnonDoc(review) }
+    else { await createDoc(review); }
+
     alert("review submitted successfully");
     navigate('/');
   }
@@ -46,14 +52,20 @@ const NewReview = () => {
 
   return (
     <Container sx={{ maxWidth: { sm: '50%', xs: '90%' } }}>
-      Reviewing experience at {name}
+      <h4>Reviewing experience at {name}</h4>
+      
+      <CheckboxWithHelp checked={isAnonymous} onChange={onAnonymousChange}
+        label="Submit anonymously?"
+        helpText="Select this if you would like your review to exclude your name."
+      />
+      <hr/>
       <CheckboxWithHelp checked={safeRestroom} onChange={onSafeRestroomChange}
         label="Safe restroom availability?"
         helpText="Select this if you were able to find a restroom that you felt safe to use"
       />
       <CheckboxWithHelp checked={neutralRestroom} onChange={onNeutralRestroomChange}
         label="Gender neutral restroom(s)?"
-        helpText="Select this if you you had access to gender neutral restrooms"
+        helpText="Select this if you had access to gender neutral restrooms"
       />
       <RatingSlider value={rating} onChange={onRatingChange} sx={{ margin: 1 }} />
       <Button disabled={!isValid} variant="contained" onClick={onSubmitClick} sx={{ margin: 1 }}>Submit</Button>
