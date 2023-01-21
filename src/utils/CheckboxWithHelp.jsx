@@ -1,5 +1,6 @@
-import { Checkbox, FormControlLabel, FormGroup, Popover, Typography } from '@mui/material';
+import { FormControlLabel, FormGroup, Popover, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import CheckboxPair from './CheckboxPair';
 
 const CheckboxWithHelp = ({ checked, onChange, label, helpText }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -16,7 +17,8 @@ const CheckboxWithHelp = ({ checked, onChange, label, helpText }) => {
     <FormGroup>
       <FormControlLabel
         onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose} control={<Checkbox checked={checked} onChange={onChange} />} label={label} />
+        onMouseLeave={handlePopoverClose}
+        control={<CheckboxPair checked={checked} onChange={onChange} />} label={label} />
       <Popover
         id="mouse-over-popover"
         sx={{

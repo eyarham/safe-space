@@ -1,7 +1,7 @@
 import { Button, TableCell, TableRow } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import NewIcon from '../_common/NewIcon';
+import NewIcon from '../utils/NewIcon';
 import { setIsApproved, setIsReviewed } from './api';
 import RatingDisplay from './RatingDisplay';
 

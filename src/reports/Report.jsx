@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getByIdSub } from '../spaces/api';
-import Spinner from '../_common/Spinner';
+import Spinner from '../utils/Spinner';
 import { createDoc } from './api';
 
 const Report = () => {

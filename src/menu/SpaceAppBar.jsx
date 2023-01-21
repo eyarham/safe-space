@@ -12,7 +12,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../user/UserContextProvider';
 import UserMenu from '../user/UserMenu';
-import Spinner from '../_common/Spinner';
+import Spinner from '../utils/Spinner';
 
 function SpaceAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -23,8 +23,7 @@ function SpaceAppBar() {
   //const pages = ['add new'];
   useEffect(() => {
     setPages(['add new']);
-    if(isModerator)
-    {setPages(['add new', 'moderate'])}
+    if (isModerator) { setPages(['add new', 'moderate']) }
   }, [isModerator])
   useEffect(() => {
     if (user && user.data().isModerator) { setIsModerator(true) }
@@ -38,14 +37,18 @@ function SpaceAppBar() {
     switch (e.target.textContent) {
       case "add new":
         return navigate("/space")
-        case "moderate":
-          return navigate("/moderate")
+      case "moderate":
+        return navigate("/moderate")
       default:
         break;
     }
   };
 
-if(!pages) return <Spinner />
+  const onHeaderClick = () => {
+    navigate("/")
+  }
+
+  if (!pages) return <Spinner />
   return (
     <AppBar position="static" sx={{ backgroundColor: "#8240bf" }}>
       <Container maxWidth="xl">
@@ -54,7 +57,8 @@ if(!pages) return <Spinner />
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="#"
+            onClick={onHeaderClick}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
