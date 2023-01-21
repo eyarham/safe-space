@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../user/UserContextProvider';
-import Spinner from '../_common/Spinner';
+import Spinner from '../utils/Spinner';
 import { getByIdSub, updateDoc } from './api';
 import SpaceForm from './SpaceForm';
 

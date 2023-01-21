@@ -1,5 +1,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs as getFirestoreDocs, getFirestore, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { getLoggedInUser } from "../user/api";
 // import { getCurrentSub } from "../user/api";
 // Allows for better testing experience
 const firebase = {
@@ -51,17 +52,10 @@ const api = (collectionString) => {
   }
 
   const createDoc = async doc => {
-    const user = getCurrentUser();
+    const user = await getLoggedInUser();
+
     const docToAdd = {
-      createdBy: (user && user.uid) || "unknown",
-      createdDate: new Date(),
-      ...doc
-    }
-    return await addDoc(getCollection(), docToAdd);
-  }
-  const createAnonDoc = async doc => {
-    const docToAdd = {
-      createdBy:  "anonymous",
+      createdBy: (user && user.id) || "unknown",
       createdDate: new Date(),
       ...doc
     }
@@ -178,7 +172,6 @@ const api = (collectionString) => {
     getCurrentUserSub,
     getCurrentUser,
     createDoc,
-    createAnonDoc,
     getDocRef,
     getCollection,
     getById,

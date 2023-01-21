@@ -7,10 +7,11 @@ import PropTypes from 'prop-types';
 import Reports from '../reports/Reports';
 import Users from '../user/Users';
 import Submissions from './Submissions';
-import NewIcon from '../_common/NewIcon';
+import NewIcon from '../utils/NewIcon';
 import React, { useEffect, useState } from 'react';
 import { hasUnreviewedSub as hasUnreviewedReports } from '../reports/api';
 import { hasUnreviewedSub as hasUnreviewedSpaces} from '../spaces/api';
+import Reviews from '../review/Reviews';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,6 +50,7 @@ export default function ModerateTabs({ tabArray }) {
   const [value, setValue] = useState(0);
   const [newSubs, setNewSubs] = useState(0);
   const [newReports, setNewReports] = useState(0);
+  const [newReviews, setNewReviews] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -56,15 +58,18 @@ export default function ModerateTabs({ tabArray }) {
 useEffect(()=>{
   hasUnreviewedReports(setNewReports);
   hasUnreviewedSpaces(setNewSubs)
+  setNewReviews(false);
 },[])
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="users" {...a11yProps(0)} />
-          <Tab label="submissions" {...a11yProps(1)} icon={newSubs ? <NewIcon />: ''} iconPosition="end"/>
+          <Tab label="spaces" {...a11yProps(1)} icon={newSubs ? <NewIcon />: ''} iconPosition="end"/>
           <Tab label="reports" {...a11yProps(2)} icon={newReports ? <NewIcon />: ''} iconPosition="end"/>
+          <Tab label="reviews" {...a11yProps(3)} icon={newReviews ? <NewIcon />: ''} iconPosition="end"/>
         </Tabs>
+
       </Box>
       <TabPanel value={value} index={0}>
         <Users />
@@ -74,6 +79,9 @@ useEffect(()=>{
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Reports />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Reviews />
       </TabPanel>
     </Box>
   );

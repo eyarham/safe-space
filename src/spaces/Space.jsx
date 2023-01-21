@@ -2,11 +2,11 @@ import { Button } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../user/UserContextProvider';
-import Spinner from '../_common/Spinner';
 // import AddressTextBox from '../map/AddressTextBox';
+import SpaceMap from '../spaceMap/SpaceMap';
+import Spinner from '../utils/Spinner';
 import { getByIdSub } from './api';
 import RatingDisplay from './RatingDisplay';
-import SpaceMap from '../spaceMap/SpaceMap';
 const Space = () => {
   const navigate = useNavigate();
   const [existingSpace, setExistingSpace] = useState();

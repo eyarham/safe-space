@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getByIdSub } from '../spaces/api';
 import RatingSlider from '../spaces/RatingSlider';
-import CheckboxWithHelp from '../_common/CheckboxWithHelp';
-import Spinner from '../_common/Spinner';
+import CheckboxHeader from '../utils/CheckboxHeader';
+import CheckboxWithHelp from '../utils/CheckboxWithHelp';
+import Spinner from '../utils/Spinner';
 import { createAnonDoc, createDoc } from './api';
 
 const NewReview = () => {
@@ -27,20 +28,21 @@ const NewReview = () => {
   }, [safeRestroom, neutralRestroom, rating])
 
   const onSafeRestroomChange = e => {
-    setSafeRestroom(e.target.checked);
+    setSafeRestroom(e);
   }
   const onNeutralRestroomChange = e => {
-    setNeutralRestroom(e.target.checked);
+    setNeutralRestroom(e);
   }
   const onAnonymousChange = e => {
-    setIsAnonymous(e.target.checked);
+    setIsAnonymous(e);
   }
   const onRatingChange = r => {
     setRating(r);
   }
   const onSubmitClick = async () => {
     if (!isValid) return;
-    const review = { name, rating, isApproved: false, safeRestroom, neutralRestroom, spaceId, isAnonymous }
+    const { name } = space.data();
+    const review = { spaceName: name, rating, isApproved: false, safeRestroom, neutralRestroom, spaceId, isAnonymous }
     if (isAnonymous) { await createAnonDoc(review) }
     else { await createDoc(review); }
 
@@ -53,12 +55,12 @@ const NewReview = () => {
   return (
     <Container sx={{ maxWidth: { sm: '50%', xs: '90%' } }}>
       <h4>Reviewing experience at {name}</h4>
-      
+      <CheckboxHeader />
       <CheckboxWithHelp checked={isAnonymous} onChange={onAnonymousChange}
         label="Submit anonymously?"
         helpText="Select this if you would like your review to exclude your name."
       />
-      <hr/>
+      <hr />
       <CheckboxWithHelp checked={safeRestroom} onChange={onSafeRestroomChange}
         label="Safe restroom availability?"
         helpText="Select this if you were able to find a restroom that you felt safe to use"

@@ -101,7 +101,7 @@ const getUserName = async (userId) => {
   return userName;
 
 }
-const getUserNameSub = async (userId, callback) => {
+const getUserNameSub = (userId, callback) => {
   if (!userId) return;
   return getByIdSub(userId, (user) => {
     const userName = user.data() && user.data().displayName
