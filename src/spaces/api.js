@@ -25,6 +25,10 @@ const setIsReviewed = async (id, isReviewed) => {
   await updateField(id, { isReviewed });
 }
 
+const updateSpaceRating = async (id, rating)=>{
+  return await  updateField(id, {rating});
+}
+
 const hasUnreviewedSub = (callback) => {
   return getDocsSub(docs => {
     const unreviewedDocs = docs.filter(d => d.data().isReviewed !== true);
@@ -33,5 +37,20 @@ const hasUnreviewedSub = (callback) => {
   })
 }
 
-export { create, getDocsSub, getApprovedDocsSub, getByIdSub, updateDoc, setIsApproved, setIsReviewed, hasUnreviewedSub };
+const getRatingData = rating => {
+  if (0 < rating && rating < 2)
+    return { text: "Hostile", icon: "red" }
+  if (2 <= rating && rating < 3)
+  return { text: "Caution", icon: "orange" }
+  if (3 <= rating && rating < 4)
+  return { text: "LGB Friendly", icon: "yellow" }
+  if (4 <= rating && rating < 4.5)
+  return { text: "LGBT+ Friendly", icon: "green" }
+  if (4.5 <= rating )
+  return { text: "LGBT+ Safe Space", icon: "blue" }
+
+  return { text: "?", icon: "black" }
+}
+
+export { create, getDocsSub, getApprovedDocsSub, getByIdSub, updateDoc, setIsApproved, setIsReviewed, hasUnreviewedSub,updateSpaceRating,getRatingData };
 
