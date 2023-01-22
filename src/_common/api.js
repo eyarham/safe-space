@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs as getFirestoreDocs, getFirestore, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, where } from "firebase/firestore";
 import { getLoggedInUser } from "../user/api";
 // import { getCurrentSub } from "../user/api";
 // Allows for better testing experience
@@ -143,6 +143,17 @@ const api = (collectionString) => {
     });
     return unsub;
   }
+  const getDocsByField = async (field, value) => {
+    const q = query(getCollection(), where(field, "==", value));
+    const snapshot = await getDocs(q);
+    return snapshot.docs;
+  }
+  const getDocsByFields = async (fieldValueArray) => {
+    const whereClause = fieldValueArray.map(x => where(x.field, "==", x.value));
+    const q = query(getCollection(), ...whereClause);
+    const snapshot = await getDocs(q);
+    return snapshot.docs;
+  }
 
   // const getDocsByCurrentUserFieldSub = (field, callback) => {
   //   return getCurrentSub(currentUser => {
@@ -159,15 +170,14 @@ const api = (collectionString) => {
   //     }
   //   })
   // }
-  const getDocs = async () => {
-    return await getFirestoreDocs(getCollection());
-  }
 
   return {
     // getDocsByCurrentUserFieldSub, 
-    getDocsByFieldsSub, getDocs,
+    getDocsByFieldsSub,
     // getDocsByCurrentUserFieldAndOtherFieldsSub, 
     getDocsByFieldSub,
+    getDocsByField,
+    getDocsByFields,
     confirmAddress,
     getCurrentUserSub,
     getCurrentUser,

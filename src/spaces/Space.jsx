@@ -26,13 +26,13 @@ const Space = () => {
 
   useEffect(() => {
     if (!existingSpace) return;
-    const { address } = existingSpace.data();
+    const { address, rating } = existingSpace.data();
     const { addressString, coords } = address;
     setSpaceMarker([{
       data: () => {
         return {
           name: addressString,
-          rating: 5,
+          rating,
           address: { coords: coords }
         }
       }

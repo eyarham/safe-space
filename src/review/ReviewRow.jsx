@@ -4,14 +4,14 @@ import UserName from '../user/UserName';
 import { setIsApproved } from './api';
 
 const ReviewRow = ({ review }) => {
-  const { text, spaceName, isApproved, rating, safeRestroom, neutralRestroom, isAnonymous, createdBy, createdDate } = review.data();
+  const { text, spaceName, isApproved, rating, safeRestroom, neutralRestroom, isAnonymous, createdBy, createdDate, spaceId } = review.data();
 
 
   const approve = async () => {
-    await setIsApproved(review.id, true);
+    await setIsApproved(review.id, true, spaceId);
   }
   const remove = async () => {
-    await setIsApproved(review.id, false);
+    await setIsApproved(review.id, false, spaceId);
   }
   return (
     <TableRow
