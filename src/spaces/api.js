@@ -38,15 +38,15 @@ const hasUnreviewedSub = (callback) => {
 }
 
 const getRatingData = rating => {
-  if (0 < rating && rating < 1)
+  if (0 < rating && rating < 2)
     return { text: "Hostile", icon: "red" }
-  if (1 <= rating && rating < 2)
-  return { text: "Caution", icon: "orange" }
   if (2 <= rating && rating < 3)
-  return { text: "LGB Friendly", icon: "yellow" }
+  return { text: "Caution", icon: "orange" }
   if (3 <= rating && rating < 4)
+  return { text: "LGB Friendly", icon: "yellow" }
+  if (4 <= rating && rating < 4.5)
   return { text: "LGBT+ Friendly", icon: "green" }
-  if (4 <= rating )
+  if (4.5 <= rating )
   return { text: "LGBT+ Safe Space", icon: "blue" }
 
   return { text: "?", icon: "black" }
