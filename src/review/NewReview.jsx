@@ -1,4 +1,5 @@
 import { Button, Container } from '@mui/material';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getByIdSub } from '../spaces/api';
@@ -7,14 +8,15 @@ import CheckboxHeader from '../utils/CheckboxHeader';
 import CheckboxWithHelp from '../utils/CheckboxWithHelp';
 import Spinner from '../utils/Spinner';
 import { createAnonDoc, createDoc } from './api';
-
 const NewReview = () => {
+  const auth = getAuth();
   const { spaceId } = useParams();
   const navigate = useNavigate();
   const [rating, setRating] = useState(null);
   const [safeRestroom, setSafeRestroom] = useState(null);
   const [neutralRestroom, setNeutralRestroom] = useState(null);
   const [isAnonymous, setIsAnonymous] = useState(true);
+  const [loggedInUser, setLoggedInUser] = useState();
   const [space, setSpace] = useState();
   const [isValid, setIsValid] = useState(false);
 
@@ -26,6 +28,23 @@ const NewReview = () => {
     if (safeRestroom !== null && neutralRestroom !== null && rating !== null) { setIsValid(true) }
     else { setIsValid(false) }
   }, [safeRestroom, neutralRestroom, rating])
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        //const uid = user.uid;
+       setLoggedInUser(user);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        setLoggedInUser(null);
+      }
+    });
+
+  }, [auth])
 
   const onSafeRestroomChange = e => {
     setSafeRestroom(e);
@@ -56,7 +75,7 @@ const NewReview = () => {
     <Container sx={{ maxWidth: { sm: '50%', xs: '90%' } }}>
       <h4>Reviewing experience at {name}</h4>
       <CheckboxHeader />
-      <CheckboxWithHelp checked={isAnonymous} onChange={onAnonymousChange}
+      <CheckboxWithHelp checked={isAnonymous} disabled={!loggedInUser} onChange={onAnonymousChange}
         label="Submit anonymously?"
         helpText="Select this if you would like your review to exclude your name."
       />
