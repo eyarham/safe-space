@@ -1,7 +1,7 @@
 import { Radio } from '@mui/material';
 import React, { useState } from 'react';
 
-const CheckboxPair = ({ onChange, checked }) => {
+const CheckboxPair = ({ onChange, checked, disabled }) => {
   const [selectedValue, setSelectedValue] = useState(checked);
 
   const handleChange = (event) => {
@@ -17,6 +17,7 @@ const CheckboxPair = ({ onChange, checked }) => {
         value={true}
         name="radio-buttons"
         inputProps={{ 'aria-label': 'true' }}
+        disabled={disabled}
       />
       <Radio
         checked={selectedValue === false}
@@ -24,6 +25,7 @@ const CheckboxPair = ({ onChange, checked }) => {
         value={false}
         name="radio-buttons"
         inputProps={{ 'aria-label': 'false' }}
+        disabled={disabled}
       />
     </div>
   )

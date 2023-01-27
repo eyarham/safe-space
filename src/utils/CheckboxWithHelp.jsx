@@ -2,7 +2,7 @@ import { FormControlLabel, FormGroup, Popover, Typography } from '@mui/material'
 import React, { useState } from 'react';
 import CheckboxPair from './CheckboxPair';
 
-const CheckboxWithHelp = ({ checked, onChange, label, helpText }) => {
+const CheckboxWithHelp = ({ checked, onChange, label, helpText, disabled }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handlePopoverOpen = (event) => {
@@ -18,7 +18,7 @@ const CheckboxWithHelp = ({ checked, onChange, label, helpText }) => {
       <FormControlLabel
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        control={<CheckboxPair checked={checked} onChange={onChange} />} label={label} />
+        control={<CheckboxPair checked={checked} onChange={onChange} disabled={disabled} />} label={label} />
       <Popover
         id="mouse-over-popover"
         sx={{
