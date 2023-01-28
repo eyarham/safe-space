@@ -18,15 +18,20 @@ function SpaceAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate()
   const [isModerator, setIsModerator] = useState();
+  const [isAdmin, setIsAdmin] = useState();
   const [pages, setPages] = useState();
   const { user } = useContext(UserContext);
   //const pages = ['add new'];
   useEffect(() => {
+    const pages = ['add new'];
     setPages(['add new']);
-    if (isModerator) { setPages(['add new', 'moderate']) }
-  }, [isModerator])
+    if (isModerator) { pages.push('moderate') }
+    if (isAdmin) { pages.push('admin') }
+    setPages(pages)
+  }, [isModerator, isAdmin])
   useEffect(() => {
     if (user && user.data().isModerator) { setIsModerator(true) }
+    if (user && user.data().isAdmin) { setIsAdmin(true) }
   }, [user]);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,6 +44,8 @@ function SpaceAppBar() {
         return navigate("/space")
       case "moderate":
         return navigate("/moderate")
+      case "admin":
+        return navigate("/config")
       default:
         break;
     }

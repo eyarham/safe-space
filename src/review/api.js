@@ -1,6 +1,6 @@
 import { updateSpaceRating } from "../spaces/api";
 import api from "../_common/api";
-const { createDoc, createAnonDoc, getDocsSub, updateField, getDocsByFieldSub, getDocsByFields } = api("reviews");
+const { createDoc,  getDocsSub, updateField, getDocsByFieldSub, getDocsByFields } = api("reviews");
 
 
 const setIsApproved = async (id, isApproved, spaceId) => {
@@ -32,5 +32,5 @@ const getRating = async (spaceId) => {
   return rating;
 }
 
-export { createDoc, createAnonDoc, getDocsSub, setIsApproved, getRatingSub, getRating };
+export { createDoc,  getDocsSub, setIsApproved, getRatingSub, getRating };
 

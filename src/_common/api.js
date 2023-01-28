@@ -79,7 +79,7 @@ const api = (collectionString) => {
   const updateField = async (id, fieldObj) => {
     const docRef = getDocRef(id);
     const doc = await firebase.getDoc(docRef);
-    const updatedData = { ...doc.data(), ...doc.data(), ...fieldObj };
+    const updatedData = { ...doc.data(), ...fieldObj };
     await firebase.setDoc(getDocRef(id), updatedData);
   }
 
@@ -170,6 +170,7 @@ const api = (collectionString) => {
   //     }
   //   })
   // }
+
 
   return {
     // getDocsByCurrentUserFieldSub, 
