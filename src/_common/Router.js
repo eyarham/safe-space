@@ -4,6 +4,7 @@ import LoginPanel from '../auth/LogInPanel';
 import Logout from '../auth/Logout';
 import SignIn from '../auth/SignIn';
 import SignUp from '../auth/SignUp';
+import Config from '../config/Config';
 import Moderate from '../moderate/Moderate';
 import Report from '../reports/Report';
 import NewReview from '../review/NewReview';
@@ -32,6 +33,7 @@ const Router = () => {
           <Route path="/moderate" element={<Moderate />} />
           <Route path="/report/:spaceId" element={<Report />} />
           <Route path="/newreview/:spaceId" element={<NewReview />} />
+          <Route path="/config" element={<Config />} />
         </Route>
       </Routes>
     </BrowserRouter>

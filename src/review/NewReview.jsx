@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getByIdSub } from '../spaces/api';
 import RatingSlider from '../spaces/RatingSlider';
+import { getRandomWord } from '../utils/api';
 import CheckboxHeader from '../utils/CheckboxHeader';
 import CheckboxWithHelp from '../utils/CheckboxWithHelp';
 import Spinner from '../utils/Spinner';
-import api from '../_common/api';
 import { createDoc } from './api';
 const NewReview = () => {
   const auth = getAuth();
@@ -27,10 +27,9 @@ const NewReview = () => {
   }
   useEffect(() => {
     const eff = async () => {
-      const word1 = await api().getRandomWord('adjective');
-      const word2 = await api().getRandomWord('adjective');
-      const word3 = await api().getRandomWord('noun');
-      const word = `${capitalizeFirstLetter(word1)}${capitalizeFirstLetter(word2)}${capitalizeFirstLetter(word3)}`;
+      const word1 = await getRandomWord('adjective');
+      const word2 = await getRandomWord('noun');
+      const word = `${capitalizeFirstLetter(word1)}${capitalizeFirstLetter(word2)}`;
       setClaimCode(word);
     }
     eff();
@@ -78,8 +77,8 @@ const NewReview = () => {
     await navigator.clipboard.writeText(claimCode);
   }
 
-  const onTextChange= e=>{
-setText(e.target.value);
+  const onTextChange = e => {
+    setText(e.target.value);
   }
 
   const onSubmitClick = async () => {
@@ -89,7 +88,7 @@ setText(e.target.value);
       spaceName: name,
       rating, isApproved: false, safeRestroom,
       neutralRestroom, spaceId,
-      isAnonymous,text
+      isAnonymous, text
     }
     if (isAnonymous && !loggedInUser) {
       review.claimCode = claimCode

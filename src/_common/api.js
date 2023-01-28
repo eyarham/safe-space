@@ -79,7 +79,7 @@ const api = (collectionString) => {
   const updateField = async (id, fieldObj) => {
     const docRef = getDocRef(id);
     const doc = await firebase.getDoc(docRef);
-    const updatedData = { ...doc.data(), ...doc.data(), ...fieldObj };
+    const updatedData = { ...doc.data(), ...fieldObj };
     await firebase.setDoc(getDocRef(id), updatedData);
   }
 
@@ -171,22 +171,6 @@ const api = (collectionString) => {
   //   })
   // }
 
-  const getRandomWord = async (type) => {
-    //typeOptions=[noun, verb, adjective, adverb]
-    const uri = 'https://api.api-ninjas.com/v1/randomword'
-    const uriWithParams = `${uri}?type=${type}`
-    const apiKey = 'n7GiGmrGIen2dDTOapYW7w==cgBNZ998vj2xvYvt'
-    const response = await fetch(uriWithParams, {
-      mode: 'cors',
-      headers: {
-        'x-api-key': apiKey,
-        'User-Agent': 'My-App',
-        'Accept': '*/*',
-      }
-    });
-    const obje= await response.json();
-    return obje.word;
-  }
 
   return {
     // getDocsByCurrentUserFieldSub, 
@@ -208,8 +192,7 @@ const api = (collectionString) => {
     getDocsSub,
     getDocsForCurrentUserSub,
     updateDoc,
-    updateField,
-    getRandomWord
+    updateField
   };
 }
 export default api;
