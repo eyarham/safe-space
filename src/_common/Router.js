@@ -7,11 +7,12 @@ import SignUp from '../auth/SignUp';
 import Config from '../config/Config';
 import Moderate from '../moderate/Moderate';
 import Report from '../reports/Report';
-import NewReview from '../review/NewReview';
+import EditReview from '../reviews/EditReview';
+import NewReview from '../reviews/NewReview';
 import EditSpace from '../spaces/EditSpace';
 import NewNewSpace from '../spaces/NewNewSpace';
 import Space from '../spaces/Space';
-import Account from '../user/Account';
+import AccountTabs from '../user/account/AccountTabs';
 import Home from './Home';
 import Layout from './Layout';
 
@@ -20,7 +21,7 @@ const Router = () => {
     <BrowserRouter >
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/account" element={<Account />} />
+          <Route path="/account" element={<AccountTabs />} />
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/space" element={<NewNewSpace />} />
@@ -33,6 +34,7 @@ const Router = () => {
           <Route path="/moderate" element={<Moderate />} />
           <Route path="/report/:spaceId" element={<Report />} />
           <Route path="/newreview/:spaceId" element={<NewReview />} />
+          <Route path="/review/:id/edit" element={<EditReview />} />
           <Route path="/config" element={<Config />} />
         </Route>
       </Routes>
