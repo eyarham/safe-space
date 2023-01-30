@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../user/UserContextProvider';
-import { getCurrentSub, set, updateUserEmail } from './api';
+import { UserContext } from '../UserContextProvider';
+import { getCurrentSub, set, updateUserEmail } from '../api';
 
 
 const Account = () => {

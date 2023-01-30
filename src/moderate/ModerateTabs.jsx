@@ -11,7 +11,7 @@ import NewIcon from '../utils/NewIcon';
 import React, { useEffect, useState } from 'react';
 import { hasUnreviewedSub as hasUnreviewedReports } from '../reports/api';
 import { hasUnreviewedSub as hasUnreviewedSpaces} from '../spaces/api';
-import Reviews from '../review/Reviews';
+import Reviews from '../reviews/Reviews';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,7 +46,7 @@ function a11yProps(index) {
   };
 }
 
-export default function ModerateTabs({ tabArray }) {
+export default function ModerateTabs() {
   const [value, setValue] = useState(0);
   const [newSubs, setNewSubs] = useState(0);
   const [newReports, setNewReports] = useState(0);
